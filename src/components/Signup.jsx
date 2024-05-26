@@ -13,9 +13,10 @@ const Signup = () => {
         </div>      
         {/* header portion ends */}
         <div className="inputs">
+
         <div className='input'>
-            <img src={user_icon} alt="user_id" className='icon'/>
-            <input type="text" placeholder='User ID'/>
+            <img src={user_icon} alt="user_name" className='icon'/>
+            <input type="text" placeholder='Name'/>
         </div>
         <div className='input'>
             <img src={email_icon} alt="gmail" className='icon'/>

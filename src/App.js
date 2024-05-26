@@ -8,9 +8,9 @@ import Home from './components/home.jsx'
 function App() {
   return (
     <div >
-       {/* <Signup/> */}
+       <Signup/>
       {/* <Login /> */}
-      <Home/>
+      {/* <Home/> */}
 
 
     </div>
