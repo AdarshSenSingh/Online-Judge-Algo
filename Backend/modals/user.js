@@ -1,23 +1,28 @@
-const mongoose =require('mongoose');
-const userSchema= new mongoose.Schema({
- user_name:{
+// models/user.js
+import mongoose from 'mongoose';
+
+const userSchema = new mongoose.Schema({
+  user_name: {
     type: String,
-    default: null,
-    require: true,
- },
- email:{
+    required: true
+  },
+  email: {
     type: String,
-    default: null,
-    require: true,
-    unique: true,
- },
- passward:{
+    required: true,
+    unique: true
+  },
+  password: {
     type: String,
-    require: true,
- },
- conf_passward:{
-    type: String,
-    require: true,
- },
+    required: true
+  }
 });
-module.exports= mongoose.model("user", userSchema);
+
+// Virtual field for `conf_password`
+userSchema.virtual('conf_password').get(function() {
+  return this._conf_password;
+}).set(function(value) {
+  this._conf_password = value;
+});
+
+const User = mongoose.model('User', userSchema);
+export default User;
