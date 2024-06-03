@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Signup.css';
-import user_icon from './asserts/user.png'
+import user_icon from './asserts/user.png';
 import email_icon from './asserts/mail.png';
 import password_icon from './asserts/hide.png';
 import { Link } from 'react-router-dom';
@@ -15,7 +15,7 @@ function Signup(){
 
   const handleSubmit=(e)=>{
     e.preventDefault();
-    axios.post('http://localhost:3000/register',{user_name,email,password,conf_password})
+    axios.post('http://localhost:6000/user',{user_name,email,password,conf_password})
     .then(result => console.log(result))
     .catch(err => console.log(err));
   };
