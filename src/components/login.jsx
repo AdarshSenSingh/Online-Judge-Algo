@@ -1,7 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './login.css'
 import email_icon from './asserts/mail.png'
 import password_icon from './asserts/hide.png'
+
 const login = () => {
   return (
     <div className='container' >
@@ -23,15 +25,15 @@ const login = () => {
         </div>
         </div>
         <div className="submit_container">
-            <button className='submit'>Login</button>
+           <Link to="/compiler">login</Link>
         </div>
         <div className='forgot'>
-        Forgot Passward <span class="fog"> Click here</span>
+        Forgot Passward <span className="fog"> Click here</span>
         </div>
         <br />
         <div className='already'>
         New User!
-        <span className='Login_here'> Sign up now  </span> 
+        <Link className="login_here" to="/register">Sign up now</Link>
         </div>
     </div>
   )

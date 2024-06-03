@@ -22,6 +22,7 @@ app.get("/", (req, res) => {
 app.post("/register", async (req, res) => {
     try {
         // get the data from the user(frontend)
+        User.create(req.body);
         const { user_name, email, password, conf_password } = req.body;
         // check that all the data must be in correct fromat and valid
         if (!(user_name && email && password && conf_password)) {

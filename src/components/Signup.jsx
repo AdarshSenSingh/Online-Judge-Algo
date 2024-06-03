@@ -4,54 +4,21 @@ import './Signup.css';
 import user_icon from './asserts/user.png'
 import email_icon from './asserts/mail.png';
 import password_icon from './asserts/hide.png';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
-const Signup = () => {
-  const [formData, setFormData] = useState({
-    user_name: '',
-    email: '',
-    password: '',
-    conf_password: ''
-  });
+function Signup(){
+  const [user_name,setName]= useState();
+  const [email,setEmail]= useState();
+  const [password,setPassword]= useState();
+  const [conf_password,setConfpassword]=useState();
 
-  const navigate = useNavigate(); // Use useNavigate instead of useHistory
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = async (e) => {
+  const handleSubmit=(e)=>{
     e.preventDefault();
-    const { user_name, email, password, conf_password } = formData;
-
-    // Validate form data here if needed
-
-    try {
-      const response = await fetch('/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ user_name, email, password, conf_password })
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        alert(data.message);
-        navigate('/login'); // Use navigate to redirect
-      } else {
-        const errorData = await response.json();
-        alert(errorData.message || 'Registration failed');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      alert('An error occurred during registration');
-    }
+    axios.post('http://localhost:3000/register',{user_name,email,password,conf_password})
+    .then(result => console.log(result))
+    .catch(err => console.log(err));
   };
-
   return (
     <div className='container'>
       {/* Header Start */}
@@ -70,8 +37,7 @@ const Signup = () => {
               type="text"
               name="user_name"
               placeholder='Name'
-              value={formData.user_name}
-              onChange={handleChange}
+              onChange= {(e)=>setName(e.target.value)}
               required
             />
           </div>
@@ -81,8 +47,7 @@ const Signup = () => {
               type="email"
               name="email"
               placeholder='Email'
-              value={formData.email}
-              onChange={handleChange}
+              onChange= {(e)=>setEmail(e.target.value)}
               required
             />
           </div>
@@ -92,8 +57,7 @@ const Signup = () => {
               type="password"
               name="password"
               placeholder='Password'
-              value={formData.password}
-              onChange={handleChange}
+              onChange= {(e)=>setPassword(e.target.value)}
               required
             />
           </div>
@@ -103,24 +67,31 @@ const Signup = () => {
               type="password"
               name="conf_password"
               placeholder='Confirm Password'
-              value={formData.conf_password}
-              onChange={handleChange}
+              onChange= {(e)=>setConfpassword(e.target.value)}
               required
             />
           </div>
         </div>
         <div className="submit_container">
-          <button type="submit" className='submit'>Sign Up</button>
+          <Link to="/login" >Sign Up</Link>
         </div>
       </form>
+      
       {/* Form End */}
 
       <div className='already'>
         Already Registered?
-        <div className='login_here' onClick={() => navigate('/login')}> Login here </div>
+        <Link className='login_here' to="/login"> Login here </Link>
       </div>
     </div>
   );
 }
 
 export default Signup;
+
+
+
+
+
+
+

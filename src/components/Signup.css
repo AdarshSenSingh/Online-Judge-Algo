@@ -66,8 +66,10 @@
     font-size: 19px; 
 }
 .submit_container{
-  align-items: center;
-  margin: auto;
+    align-items: center;
+    margin: auto;
+    cursor: pointer;
+    color: #1e46e8;
 }
 .submit{
     cursor: pointer;

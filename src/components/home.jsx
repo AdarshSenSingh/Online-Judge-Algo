@@ -1,12 +1,13 @@
 import React from 'react'
 import './home.css'
 import code_icon from './asserts/web-development.png'
-import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { Link } from 'react-router-dom';
+import Signup from './Signup.jsx';
 const home = () => {
   return (
        <div>
@@ -51,10 +52,13 @@ const home = () => {
        <h1>Sign Up now!</h1>
        
        
-       <Button title='Sign Up ' onClick={()=>alert('simple Button pressed')}> Sign Up</Button>
-    
+       <Link to="/register"> signup</Link>
+
+       <h2>Already Registered!</h2>
+       <h1>Login here</h1>
+       <Link to="/login">login</Link>    
        </div>
   )
 }
 
-export default home
+export default home;
