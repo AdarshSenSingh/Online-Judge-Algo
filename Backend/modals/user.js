@@ -21,12 +21,6 @@ const userSchema = new mongoose.Schema({
   }
 });
 
-// Virtual field for `conf_password`
-userSchema.virtual('conf_password').get(function() {
-  return this._conf_password;
-}).set(function(value) {
-  this._conf_password = value;
-});
 
 const User = mongoose.model('User', userSchema);
 export default User;

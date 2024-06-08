@@ -1,18 +1,20 @@
 import dbConnections from './Database/db.js';
+import cors from 'cors';
 import express from 'express';
-import dotenv from 'dotenv';
 import User from './modals/user.js';
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs';
 import cookieParser from 'cookie-parser';
-dotenv.config(); // Load environment variables early
 const app = express();
 dbConnections();
 
 // middlewares
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+// const cors = require("cors");
+
 // get is type of request (sending)
 app.get("/", (req, res) => {
     res.send("Hello World");
@@ -22,6 +24,7 @@ app.get("/", (req, res) => {
 app.post("/register", async (req, res) => {
     try {
         // get the data from the user(frontend)
+        console.log(req.body);
         User.create(req.body);
         const { user_name, email, password, conf_password } = req.body;
         // check that all the data must be in correct fromat and valid
@@ -38,7 +41,7 @@ app.post("/register", async (req, res) => {
         }
         //check if the user already exits
         const userExit = await User.findOne({ email });
-        if (userExit) {
+        if (userExit===email) {
             return res.status(400).send("User Already Exits");
         }
 
@@ -56,7 +59,7 @@ app.post("/register", async (req, res) => {
         });
         user.token = token;
         user.password = undefined;
-        res.status(200).json({ message: `You have sucessfully registered!`, user });
+        res.status(200).json({ message: `You have sucessfully registered!` });
     }
 
 

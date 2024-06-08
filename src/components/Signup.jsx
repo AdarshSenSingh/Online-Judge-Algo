@@ -15,7 +15,7 @@ function Signup(){
 
   const handleSubmit=(e)=>{
     e.preventDefault();
-    axios.post('http://localhost:6000/user',{user_name,email,password,conf_password})
+    axios.post('http://localhost:6000/register',{user_name,email,password,conf_password})
     .then(result => console.log(result))
     .catch(err => console.log(err));
   };
@@ -73,7 +73,8 @@ function Signup(){
           </div>
         </div>
         <div className="submit_container">
-          <Link to="/login" >Sign Up</Link>
+          <button >Sign Up</button>
+          {/* <Link to="/login" >Sign Up</Link> */}
         </div>
       </form>
       
